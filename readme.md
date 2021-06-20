@@ -7,13 +7,13 @@ Usage.
 ## 1. First download Gretio
 - https://play.google.com/store/apps/details?id=com.surrealdev.max&hl=en_US&gl=US
 
-## 2. Connect and Authenticate with Gretio.
+## 2. Connectwith Gretio.
 - Gretio uses zeroConf (Apple Bonjour, NDS) to
   discover new services. Its id is "_gretiowebservice._tcp".
   Optionally you may listen for the "com.surreal.gretio.SERVER_STARTED" broadcast
   which will contain a needed "addr" and "port" field. The service name is "com.surrealdev.gretio.androidserver.service.ScapiService" and can be started manually if need be.
 - Gretio Uses HTTPS so you will need to configure your security settings appropiately. For the initial connection you may accept
-  any certificate. Doing this is vulnerable to some targeted MITM attacks.
+  any certificate. Doing this is vulnerable to some targeted MITM attacks. But only for this first connection.
   - After you have found the server you can open a web socket conenction to the url
   wss:/\$address:\$port/ws. The default port is 57039 however other ports will be chosen if its taken. Only hard code the port for testing.
 ##  3. Data format
@@ -46,4 +46,7 @@ Usage.
 
 * In classic OBD2 you generally make a request for a PID and receive a single instance of this. This is extremely slow. Instead use a SubscribeRequest which controls a subscription to a feature.
 * Depending on the context, each pid will refresh somewhere between 5 and 20 times a second. This holds true even for multiple PIDs. So if you subscribe to 20 pids then you will have a combined rate of 400 updates/s. This is possible as Gretio implements UDS (Unified Diagnostic Services). Which is significantly faster than standard OBD2.
- 
+
+### 6. Long Job Status Update
+* You may notice a "LongJobStatusUpdate" being sent around. Put simply cars are complicated. Connecting to a car from a phone is really complicated. Stuff happens. Maybe Gretio needs to do a scan. Maybe it lost connection to the OBD2 device. These alerts are sent using this update which you can use to make prompts for your user.
+* The rest of the api tries to hide this underlying madness. If you lose connection your subscriptions will simply stop. Module lookups will return empty lists. And future subscriptions will be denied. No further action is needed.
