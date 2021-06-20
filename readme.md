@@ -28,13 +28,13 @@ Usage.
 - All messages are json encoded. So an auth request may look like
 - `{"token":"MyTokenIsCool","cseq":1,"t":1,"id":80}`
 ## 4. Authorize with Gretio
-    - Gretio obviously requires authorization. In the end this will be a simple "API Token", a string which you keep in your app for future use. You should store this token alongside the public key of the server.
-    1. Send auth request. i.e.  `{"token":"Anything","requestNewToken":true,"t":1,"id":80,"rco":200}`
-    2. Receive the challenge
+   - Gretio obviously requires authorization. In the end this will be a simple "API Token", a string which you keep in your app for future use. You should store this token alongside the public key of the server.
+   1. Send auth request. i.e.  `{"token":"Anything","requestNewToken":true,"t":1,"id":80,"rco":200}`
+   2. Receive the challenge
      `{"authResult":false,"challengeCode":"123456","t":2,"id":80,"rco":200}`
-     3. Prompt your user to enter the challenge code **in the Gretio App**.  Once done you will get back a unsolicited message.
+   3. Prompt your user to enter the challenge code **in the Gretio App**.  Once done you will get back a unsolicited message.
      `{"authResult":true,"token":"YOURNEWTOKENSAVETHIS","t":2,"id":80,"rco":200}`
-     4. Save this token for future use. You cannot get it back. This is the only time the server will give you the token.
+   4. Save this token for future use. You cannot get it back. This is the only time the server will give you the token.
 ##  5. Working with Gretio
 * We can now start making general calls. If you are familiar with OBD2 you may know about PIDS. Maybe PID 0x11 is Engine Speed. These sort of numbers have no meaning in Gretio. Gretio gives a UUID for each PID which you can then request later on. These '**pids**' are known as '**Features**'. There are useful end points for working with the features including GetAllFeaturesRequest (get all features). And GetAllSupportedRequest (only those supported on currently connected vehicle). Each features is described as follows:
 - `id: Long` The UUID of the feature
