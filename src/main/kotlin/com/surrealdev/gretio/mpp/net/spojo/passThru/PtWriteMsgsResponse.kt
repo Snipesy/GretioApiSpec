@@ -1,0 +1,15 @@
+package com.surrealdev.gretio.mpp.net.spojo.passThru
+
+import com.surrealdev.gretio.mpp.net.spojo.MESSAGE_ID_PT_WRITE_MSGS
+import kotlinx.serialization.Required
+import kotlinx.serialization.Serializable
+
+@Serializable
+class PtWriteMsgsResponse(
+    override val passThruResult: Int,
+    val numMsgs: Long,
+    override val cseq: Int? = null
+) : PtResponse() {
+    @Required
+    override val id: Int = MESSAGE_ID_PT_WRITE_MSGS
+}
