@@ -16,6 +16,7 @@ Usage.
   any certificate. Doing this is vulnerable to some targeted MITM attacks. But only for this first connection.
   - After you have found the server you can open a web socket conenction to the url
   wss:/\$address:\$port/ws. The default port is 57039 however other ports will be chosen if its taken. Only hard code the port for testing.
+  - HTTPS is mandatory and cannot be disabled.
 ##  3. Data format
 - The web socket will send json packages. There are 3 types of messages
     - val MESSAGE_TYPE_REQUEST = 1
@@ -35,6 +36,8 @@ Usage.
    3. Prompt your user to enter the challenge code **in the Gretio App**.  Once done you will get back a unsolicited message.
      `{"authResult":true,"token":"YOURNEWTOKENSAVETHIS","t":2,"id":80,"rco":200}`
    4. Save this token for future use. You cannot get it back. This is the only time the server will give you the token.
+   - You should store this token alongside the server's public key sha256 fingerprint. You should be able to retrieve this using your chosen web client.
+   - Always check the server's public key fingerprint before supplying your token.
 ##  5. Working with Gretio
 * We can now start making general calls. If you are familiar with OBD2 you may know about PIDS. Maybe PID 0x11 is Engine Speed. These sort of numbers have no meaning in Gretio. Gretio gives a UUID for each PID which you can then request later on. These '**pids**' are known as '**Features**'. There are useful end points for working with the features including GetAllFeaturesRequest (get all features). And GetAllSupportedRequest (only those supported on currently connected vehicle). Each features is described as follows:
 - `id: Long` The UUID of the feature
