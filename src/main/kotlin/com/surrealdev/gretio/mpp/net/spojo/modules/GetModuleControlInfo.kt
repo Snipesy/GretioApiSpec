@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 class GetModuleControlInfo(
     override val cseq: Int? = null,
     var moduleName: String = "",
-    var groupName: String = "",
+    var groupId: Int = -1,
     var controlName: String = ""
 ) : GeneralRequest() {
     @Required
