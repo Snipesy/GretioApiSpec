@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 class ExecuteModuleControl(
     override val cseq: Int? = null,
     var moduleName: String = "",
-    var groupName: String = "",
+    var groupId: Int = -1,
     var controlName: String = "",
     var stateName: String = "",
     var optionalParam: String = ""
