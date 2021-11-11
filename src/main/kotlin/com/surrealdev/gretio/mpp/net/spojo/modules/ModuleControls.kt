@@ -9,7 +9,7 @@ class ModuleControls(
 )
 
 @Serializable
-class ControlGroup(var controlGroupName: String = "", var controls: List<Control> = ArrayList())
+class ControlGroup(var controlGroupName: String = "", var controlGroupId: Int = -1, var controls: List<Control> = ArrayList())
 
 @Serializable
 class Control(
